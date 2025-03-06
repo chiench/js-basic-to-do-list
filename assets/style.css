@@ -1,0 +1,92 @@
+body {
+font-family: Arial, sans-serif;
+   background-color: #f0f0f0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+}
+.container {
+    width: 500px;
+    background-color: #ffffff;
+    min-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#form {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    height: 50px;
+}
+#form #input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#form .btn-submit {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#form .btn-submit:hover {
+    background-color: #0056b3;
+}
+#list {
+    margin-top: 20px;
+
+    padding: 0px;
+    list-style: none;
+   
+}
+#list .list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+#list .list-item:hover {
+    background-color: #f0f0f0;
+    border: 1px solid #007bff;
+}
+.list-item-empty {
+    margin-top: 40px;
+    text-align: center;
+}
+#list .list-item:last-child {
+    margin-bottom: 0px;
+}
+#list .list-item .btn-delete {
+    padding: 10px 10px;
+    background-color: #ffffff;
+    color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#list .list-item .list-item-hovered {
+    background-color: #f0f0f0;
+}
+#list .list-item .btn-delete:hover {
+    background-color: #f30d24;
+    color: #ffffff;
+}
+#list .list-item .content .completed {
+    text-decoration: line-through;
+    font-style: italic;
+}
+
+
