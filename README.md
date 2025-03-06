@@ -16,7 +16,7 @@ Khi bấm vào công việc, nó sẽ được gạch ngang để đánh dấu �
 Lưu dữ liệu vào LocalStorage 💾
 
 Khi tải lại trang, danh sách công việc vẫn giữ nguyên.
-🏗 Xây dựng từng bước
+🏗 Xây dựng từng bước.
 1️⃣ Giao diện (HTML + CSS)
 HTML cần có:
 
