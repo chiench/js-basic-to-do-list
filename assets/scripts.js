@@ -1,52 +1,74 @@
-const btnSubmit = document.querySelector(".btn-submit");
-const inputEl = document.querySelector("#input");
+import { showToast } from "./scripts/toast.js";
 
-let ul = document.getElementById("list");
-const listItemEmpty = document.querySelector(".list-item-empty");
+const btnAdd = document.querySelector(".btn-submit");
+const input = document.querySelector("#input");
+const ul = document.getElementById("list");
+const emptyMsg = document.querySelector(".list-item-empty");
 
-let arrayInputValueLocal = localStorage.getItem("arrayInputValueLocal");
-console.log("arrayInputValueLocal: ", arrayInputValueLocal);
+let tasks = localStorage.getItem("tasks");
 
-btnSubmit.addEventListener("click", function () {
-  if (arrayInputValueLocal) {
-    arrayInputValueLocal = arrayInputValueLocal.concat(";", inputEl.value);
-    localStorage.setItem("arrayInputValueLocal", arrayInputValueLocal);
-  } else {
-    localStorage.setItem("arrayInputValueLocal", inputEl.value);
-  }
-  console.log("Form submitted!");
+console.log("Tasks inital ", tasks);
+
+btnAdd.addEventListener("click", function (event) {
+    event.preventDefault();
+    if (!input.value) {
+        showToast("Please enter a task!");
+        return;
+    }
+    if (tasks) {
+        tasks = tasks.concat(";", input.value);
+    } else {
+        tasks = input.value;
+    }
+    localStorage.setItem("tasks", tasks);
+
+    console.log("Task added!");
 });
 
-if (arrayInputValueLocal) {
-  listItemEmpty.style.display = "none";
-  const arrayInputValueLocalSplit = arrayInputValueLocal.split(";");
-  console.log("arrayInputValueLocalSplit: ", arrayInputValueLocalSplit);
-  for (let index = 0; index < arrayInputValueLocalSplit.length; index++) {
-    // Tạo thẻ <li>
-    let li = document.createElement("li");
+if (tasks) {
+    emptyMsg.style.display = "none";
+    const taskList = tasks.split(";");
+    console.log("TaskList: ", taskList);
 
-    li.className = "list-item";
+    for (let i = 0; i < taskList.length; i++) {
+        let li = document.createElement("li");
+        li.className = "list-item";
+        li.innerHTML = `
+            <div class="content">
+                <input type="checkbox">
+                <span>${taskList[i]}</span>
+            </div>
+            <button class="btn-delete">
+                <i class="far fa-trash-alt"></i>
+            </button>
+        `;
 
-    let tesst = "task something";
-    // Tạo nội dung bên trong
-    li.innerHTML = `
-    <div class="content">
-        <input type="checkbox">
-        <span>${arrayInputValueLocalSplit[index]}</span>
-    </div>
-    <button class="btn-delete">
-        <i class="far fa-trash-alt"></i>
-    </button>
-    `;
+        li.querySelector(".btn-delete").addEventListener("click", function () {
+            const taskValue = li.querySelector(".content span").textContent;
+            console.log("taskValue: ", taskValue);
+            const index = taskList.indexOf(taskValue);
+            console.log("index: ", index);
+            if (index > -1) {
+                taskList.splice(index, 1);
+            }
+            localStorage.setItem("tasks", taskList.join(";"));
+            tasks = localStorage.getItem("tasks");
+            console.log("tasks after remove ", tasks);
+            console.log("type of task ", typeof tasks);
+            if (taskList.length === 0) {
+                emptyMsg.style.display = "block";
+                localStorage.removeItem("tasks"); // Xóa luôn khỏi localStorage để tránh lưu trữ dữ liệu rỗng
+            }
+            li.remove();
+            input.focus();
+        });
 
-    // Thêm vào danh sách
-    ul.appendChild(li);
-    const btnDelete = document.querySelector(".btn-delete");
-    const listItem = document.querySelector(".list-item");
-    btnDelete.addEventListener("click", function () {
-      console.log("click ");
-    });
-  }
+        ul.appendChild(li);
+    }
 } else {
-  listItemEmpty.style.display = "block";
+    emptyMsg.style.display = "block";
+}
+
+function deleteTask() {
+    console.log("Click: ", li);
 }

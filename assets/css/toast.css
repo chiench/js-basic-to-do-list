@@ -1,0 +1,29 @@
+/* CSS cho toast */
+#toast-container {
+    position: fixed;
+    top: 20px; /* Cách cạnh trên màn hình 20px */
+    right: 20px; /* Cách cạnh phải màn hình 20px */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column; /* Các toast sẽ xếp chồng lên nhau theo chiều dọc */
+    align-items: flex-end; /* Canh các toast về phía bên phải */
+}
+
+.toast {
+    background-color: #f29e21;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
